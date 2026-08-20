@@ -1,0 +1,227 @@
+.individual-login-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FDFDFB; 
+  background: radial-gradient(circle at 50% 0%, #FFFFFF 0%, #FDFDFB 100%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.individual-login-screen .login-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #8C9996;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.individual-login-screen .login-close-btn:hover {
+  color: #232C2A;
+}
+
+.individual-login-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.individual-logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2E403C;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.individual-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #232C2A;
+  margin-bottom: 0.8rem;
+}
+
+.individual-subtitle {
+  font-size: 1rem;
+  color: #5A6966;
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.auth-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem;
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.auth-form-title {
+  font-size: 1.1rem;
+  color: #5A6966;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.auth-label {
+  font-size: 0.75rem;
+  color: #8C9996;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.auth-input {
+  padding: 1rem;
+  border: 1px solid #D0D6D4;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #232C2A;
+  transition: border-color 0.3s ease;
+}
+
+.auth-input::placeholder {
+  color: #A3AFA8;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #818C78;
+}
+
+.auth-forgot-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
+
+.auth-link-small {
+  font-size: 0.7rem;
+  color: #8C9996;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+  font-family: monospace;
+}
+
+.auth-link-small:hover {
+  color: #2E403C;
+}
+
+.btn-auth-primary {
+  width: 100%;
+  background-color: #2E403C;
+  color: white;
+  padding: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.btn-auth-primary:hover {
+  background-color: #1E2B28;
+}
+
+.auth-signup-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #5A6966;
+  margin-bottom: 2rem;
+}
+
+.auth-link {
+  color: #2E403C;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #E0E5E3;
+}
+
+.auth-divider:not(:empty)::before {
+  margin-right: .5em;
+}
+
+.auth-divider:not(:empty)::after {
+  margin-left: .5em;
+}
+
+.auth-divider-text {
+  font-size: 0.7rem;
+  color: #8C9996;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.btn-google {
+  width: 100%;
+  background-color: white;
+  color: #5A6966;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #D0D6D4;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-google:hover {
+  background-color: #F8F5F2;
+}
+
+.auth-footer {
+  margin-top: 3rem;
+  font-size: 0.75rem;
+  color: #A3AFA8;
+  letter-spacing: 0.05em;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+}
