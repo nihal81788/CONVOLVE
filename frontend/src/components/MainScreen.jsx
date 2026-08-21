@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import './MainScreen.css';
+import TheUntouched from './TheUntouched';
 
 const MainScreen = ({ onLoginClick }) => {
   const containerVariants = {
@@ -52,9 +53,12 @@ const MainScreen = ({ onLoginClick }) => {
     }
   };
 
+  const scrollContainerRef = useRef(null);
+
   return (
-    <div className="main-screen">
-      <header className="header">
+    <div className="main-screen" ref={scrollContainerRef} style={{ padding: 0, height: '100vh', overflowY: 'auto', overflowX: 'hidden' }}>
+      <div style={{ padding: '2rem 5rem', height: '100vh', display: 'flex', flexDirection: 'column', flexShrink: 0, position: 'relative', width: '100%', boxSizing: 'border-box' }}>
+        <header className="header">
         <motion.div 
           className="nav-links"
           initial={{ opacity: 0, y: -20 }}
@@ -190,6 +194,9 @@ const MainScreen = ({ onLoginClick }) => {
         <a href="#">Terms</a>
       </motion.div>
     </div>
+
+    <TheUntouched containerRef={scrollContainerRef} />
+  </div>
   );
 };
 
