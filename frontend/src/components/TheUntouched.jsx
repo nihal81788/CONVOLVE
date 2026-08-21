@@ -90,11 +90,44 @@ export default function TheUntouched({ containerRef }) {
     restDelta: 0.001
   });
 
+  // Split progress: cards use 0–0.82 (890vh/1090vh), overlay uses 0.82–1.0
+  const cardProgress = useTransform(springProgress, [0, 0.82, 1], [0, 1, 1]);
+
   // Calculate the starting position so the entire card track starts completely off-screen to the right (100% hidden)
   const startX = windowWidth;
 
   // Custom transform function ensures the linear mapping dynamically adapts as maxScroll updates
-  const trackX = useTransform(springProgress, (p) => startX - p * (startX + maxScroll));
+  const trackX = useTransform(cardProgress, (p) => startX - p * (startX + maxScroll));
+
+  // Overlay rises from bottom: translateY goes from 100% (off-screen bottom) to 0% (full cover)
+  const overlayY = useTransform(springProgress, [0.78, 0.92], [100, 0]);
+  const overlayTranslateY = useTransform(overlayY, (v) => `${v}%`);
+
+  // Text appears only after overlay has mostly risen (progress 0.88–1.0)
+  const solutionText = "What if the patient never had to wear the sensor?";
+  const solutionLetters = solutionText.split('');
+  const totalLetters = solutionLetters.length;
+
+  // Single scroll-driven progress for text reveal (0 at 0.88, 1 at 1.0)
+  const textRevealProgress = useTransform(springProgress, [0.88, 1.0], [0, 1]);
+
+  // Sync MotionValue to React state for per-letter style calculations during render
+  const [textProgress, setTextProgress] = useState(0);
+  useEffect(() => {
+    const unsubscribe = textRevealProgress.on('change', setTextProgress);
+    return unsubscribe;
+  }, [textRevealProgress]);
+
+  // Helper: compute per-letter opacity and y based on textProgress value
+  const getLetterStyle = (progress, letterIndex) => {
+    // Stagger: each letter starts slightly after the previous one
+    const staggered = progress * totalLetters - letterIndex;
+    const t = Math.max(0, Math.min(1, staggered * 0.8));
+    return {
+      opacity: t,
+      transform: `translateY(${(1 - t) * 40}px)`,
+    };
+  };
 
   // Clinical Photos
   const cards = [
@@ -132,8 +165,8 @@ export default function TheUntouched({ containerRef }) {
           position: relative;
           background-color: #0A1418;
           width: 100%;
-          /* 890vh vertical scroll height provides exactly ~10% faster scroll pacing under the new card width */
-          height: 890vh;
+          /* 1090vh: 890vh for cards + 200vh for solution overlay scroll phase */
+          height: 1090vh;
           box-sizing: border-box;
           flex-shrink: 0;
         }
@@ -290,6 +323,41 @@ export default function TheUntouched({ containerRef }) {
           line-height: 1.45;
         }
 
+        /* Solution Statement Full-Screen Overlay */
+        .solution-overlay {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: #0A1418;
+          z-index: 50;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: none;
+          will-change: transform;
+        }
+
+        .solution-overlay-text {
+          max-width: 80vw;
+          text-align: center;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .solution-letter {
+          font-family: system-ui, -apple-system, sans-serif;
+          font-weight: 800;
+          font-size: clamp(2.5rem, 6vw, 5.5rem);
+          color: #E8F4F2;
+          line-height: 1.2;
+          display: inline-block;
+          will-change: transform, opacity;
+        }
+
         /* Responsive Mobile Layout */
         @media (max-width: 768px) {
           .untouched-section {
@@ -392,6 +460,24 @@ export default function TheUntouched({ containerRef }) {
 
         {/* Layout Spacer */}
         <div style={{ height: '2rem' }}></div>
+
+        {/* Solution Statement Overlay — rises from bottom, scroll-driven */}
+        <motion.div
+          className="solution-overlay"
+          style={{ y: overlayTranslateY }}
+        >
+          <div className="solution-overlay-text">
+            {solutionLetters.map((letter, i) => (
+              <span
+                key={i}
+                className="solution-letter"
+                style={getLetterStyle(textProgress, i)}
+              >
+                {letter === ' ' ? '\u00A0' : letter}
+              </span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   );
