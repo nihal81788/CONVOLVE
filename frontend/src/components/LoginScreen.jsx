@@ -75,7 +75,7 @@ const LoginScreen = ({ onClose, onSelectIndividual }) => {
                 <circle cx="12" cy="7" r="4"></circle>
              </svg>
           </div>
-          <h3 className="login-card-title">Login as Individual</h3>
+          <h3 className="login-card-title">Individual Portal</h3>
           <p className="login-card-desc">
             Access your personal health metrics and ambient sensing data.
           </p>
@@ -98,7 +98,7 @@ const LoginScreen = ({ onClose, onSelectIndividual }) => {
                 <path d="M12 18l-1.5-1.5C9.4 15.4 8 14.1 8 12.5a2.5 2.5 0 0 1 4.5-1.5 2.5 2.5 0 0 1 4.5 1.5c0 1.6-1.4 2.9-2.5 4L12 18z" fill="#E2E0CB" stroke="none"></path>
              </svg>
           </div>
-          <h3 className="login-card-title">Login as Caretaker</h3>
+          <h3 className="login-card-title">Caretaker Portal</h3>
           <p className="login-card-desc">
             Monitor patients and manage care alerts seamlessly.
           </p>

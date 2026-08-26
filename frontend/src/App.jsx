@@ -4,10 +4,11 @@ import Logo from './components/Logo';
 import MainScreen from './components/MainScreen';
 import LoginScreen from './components/LoginScreen';
 import IndividualLogin from './components/IndividualLogin';
+import SignupScreen from './components/SignupScreen';
 import './index.css';
 
 function App() {
-  const [stage, setStage] = useState('intro'); // 'intro' or 'main'
+  const [stage, setStage] = useState('intro'); // 'intro', 'main', or 'signup'
   const [overlay, setOverlay] = useState(null); // null, 'portal', 'individual'
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -96,6 +97,15 @@ function App() {
             <MainScreen onLoginClick={() => setOverlay('portal')} />
           </motion.div>
         )}
+        {stage === 'signup' && (
+           <SignupScreen
+             key="signup-screen"
+             onNavigateBack={() => {
+                setStage('main');
+                setOverlay('individual');
+             }}
+           />
+        )}
       </AnimatePresence>
 
       <AnimatePresence>
@@ -110,6 +120,10 @@ function App() {
            <IndividualLogin 
              key="individual-login" 
              onClose={() => setOverlay(null)} 
+             onSignup={() => {
+                setOverlay(null);
+                setStage('signup');
+             }}
            />
         )}
       </AnimatePresence>
