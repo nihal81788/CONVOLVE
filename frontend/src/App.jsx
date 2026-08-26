@@ -57,7 +57,6 @@ function App() {
       </AnimatePresence>
       
       <motion.h1
-        layout
         initial={{ y: '100vh', opacity: 0, scale: 0.5, left: '50%', top: '50%', x: '-50%', color: '#E2E0CB' }}
         animate={
           stage === 'intro' 
@@ -65,7 +64,6 @@ function App() {
             : { top: '1.2rem', left: '5rem', x: '0%', y: '0%', opacity: 1, scale: 0.12, color: '#232C2A', textShadow: '0px 0px 0px rgba(0,0,0,0)' }
         }
         transition={{
-          layout: { duration: 1.5, ease: [0.16, 1, 0.3, 1] },
           y: stage === 'intro' ? { delay: 2.5, duration: 1.5, ease: [0.16, 1, 0.3, 1] } : { duration: 1.5, ease: [0.16, 1, 0.3, 1] },
           opacity: { delay: 2.5, duration: 1.5 },
           scale: { duration: 1.5, ease: [0.16, 1, 0.3, 1] },
